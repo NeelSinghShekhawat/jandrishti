@@ -1,0 +1,374 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>JANDRISHTI AI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{--navy:#123B6D;--blue:#2563EB;--green:#16A34A;--bg:#F5F7FB;--card:#fff;--tx:#0f172a;--mu:#64748b;--bd:#e2e8f0;--amb:#d97706;--red:#dc2626;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0b1220;--card:#111a2e;--tx:#e8eefc;--mu:#94a3b8;--bd:#24324d;--navy:#9ec1f5}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;font:15px/1.5 system-ui,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--tx)}
+header{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 16px;background:var(--card);border-bottom:1px solid var(--bd)}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--navy);font-size:18px}.tag{color:var(--mu);font-size:12px}
+nav{display:flex;gap:6px;overflow-x:auto;padding:8px 16px;background:var(--card);border-bottom:1px solid var(--bd)}
+nav button{white-space:nowrap}main{max-width:1000px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.stat b{font-size:26px;display:block;color:var(--navy)}
+button,select,input,textarea{font:inherit;border-radius:8px;border:1px solid var(--bd);padding:7px 10px;background:var(--card);color:var(--tx)}
+button{cursor:pointer}button.p{background:var(--blue);border-color:var(--blue);color:#fff}button.g{background:var(--green);border-color:var(--green);color:#fff}button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+button:hover{filter:brightness(.95)}:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+input,textarea,select{width:100%;margin:3px 0 8px}label{font-size:13px;color:var(--mu)}
+.b{display:inline-block;padding:2px 8px;border-radius:99px;font-size:12px;background:#e0e7ff;color:#1e3a8a}.ok{background:#dcfce7;color:#166534}.w{background:#fef3c7;color:#92400e}.r{background:#fee2e2;color:#991b1b}
+.banner{background:#fef3c7;color:#92400e;padding:8px 12px;border-radius:8px;font-size:13px;margin-bottom:12px}
+.bar{height:10px;border-radius:6px;background:var(--blue)}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{width:auto}
+.stage{display:inline-block;padding:3px 8px;margin:2px;border-radius:6px;font-size:12px;background:var(--bd)}.stage.d{background:#dcfce7;color:#166534}
+.tl{border-left:2px solid var(--bd);padding-left:10px;margin:6px 0 0 4px;font-size:13px}.drop{border:2px dashed var(--blue);border-radius:12px;padding:22px;text-align:center}
+.tbl{overflow-x:auto}small{color:var(--mu)}#toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 16px;border-radius:8px;display:none;z-index:9;max-width:90%}
+
+.brow{display:flex;width:100%;justify-content:space-between;align-items:center;gap:12px;text-align:left;padding:12px 14px;margin-bottom:8px;border-radius:12px}
+button.rd{background:var(--red);border-color:var(--red);color:#fff}button:disabled{opacity:.45;cursor:not-allowed}
+.bm{position:fixed;inset:0;z-index:20;background:var(--bg);display:flex;justify-content:center}
+.bmi{position:relative;display:flex;flex-direction:column;width:100%;max-width:760px;height:100%;background:var(--bg)}
+.bmh{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 16px;background:var(--card);border-bottom:1px solid var(--bd)}
+.bpdf{margin:12px;background:#fff;border:1px solid var(--bd);border-radius:12px;overflow:hidden;height:38vh;min-height:200px;flex:none}
+.bmd{flex:1;overflow-y:auto;padding:0 16px 12px}
+.bact{display:flex;gap:8px;padding:10px 16px;background:var(--card);border-top:1px solid var(--bd);align-items:center}
+.bact button{flex:1;padding:12px;font-weight:600}.bact button.chat{flex:none;position:relative}
+.bscrim{position:absolute;inset:0;background:rgba(15,23,42,.5);display:flex;align-items:flex-end;justify-content:center;z-index:30}
+.bsheet{background:var(--card);width:100%;border-radius:16px 16px 0 0;padding:16px}
+.bmsgs{height:300px;overflow-y:auto;display:flex;flex-direction:column;margin-bottom:8px}
+.bub{max-width:82%;padding:8px 10px;border-radius:12px;margin-bottom:8px}.bub.me{align-self:flex-end;background:var(--blue);color:#fff}.bub.me small{color:#dbeafe}.bub.ot{align-self:flex-start;background:var(--bd)}
+.pdfx{display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;color:#475569;height:100%}
+.inv{padding:14px;height:100%;overflow:auto;background:#fff;color:#1e293b;font-size:13px}.inv table{width:100%;border-collapse:collapse;margin:8px 0}.inv td,.inv th{padding:4px;border-bottom:1px solid #e2e8f0;text-align:left}.inv td:last-child,.inv th:last-child{text-align:right}
+.dr{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--bd)}
+
+/* ===== BILL AUDIT – restyled (scoped, prefix ba-) ===== */
+:root[data-theme=dark]{--bg:#0b1220;--card:#111a2e;--tx:#e8eefc;--mu:#94a3b8;--bd:#24324d;--navy:#9ec1f5}
+.ba{--ink:#14213D;--slate:#5B6678;--paper:#F2F4F8;--card:#fff;--line:#E1E5ED;--saffron:#E39B2D;--green:#1E8E5A;--green-bg:#E3F5EC;--orange:#C9701A;--orange-bg:#FDEBD6;--red:#C63A3A;--red-bg:#FBE3E3;--hero:#14213D;--hero-text:#fff;--hero-sub:#AEB9D1;--btn-ink:#14213D;--btn-ink-text:#fff;--seg:#E4E8F0;--scrim:rgba(20,33,61,.5);--bg-out:#D9DEE8;
+ max-width:440px;margin:0 auto;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:22px;min-height:70vh;display:flex;flex-direction:column;font-size:15px;position:relative}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .ba{--ink:#E8ECF5;--slate:#98A3B8;--paper:#0E1424;--card:#171F36;--line:#27314D;--saffron:#EAA84A;--green:#4CC38A;--green-bg:#12382A;--orange:#EBA05A;--orange-bg:#3B2A14;--red:#F07A7A;--red-bg:#3F1C1E;--hero:#1D2848;--hero-sub:#9FABC6;--btn-ink:#E8ECF5;--btn-ink-text:#14213D;--seg:#1C2542;--scrim:rgba(0,0,0,.6);--bg-out:#070B16}}
+:root[data-theme=dark] .ba{--ink:#E8ECF5;--slate:#98A3B8;--paper:#0E1424;--card:#171F36;--line:#27314D;--saffron:#EAA84A;--green:#4CC38A;--green-bg:#12382A;--orange:#EBA05A;--orange-bg:#3B2A14;--red:#F07A7A;--red-bg:#3F1C1E;--hero:#1D2848;--hero-sub:#9FABC6;--btn-ink:#E8ECF5;--btn-ink-text:#14213D;--seg:#1C2542;--scrim:rgba(0,0,0,.6);--bg-out:#070B16}
+.ba *{box-sizing:border-box}
+.ba button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0;border-radius:0}
+.ba button:hover{filter:none}
+.ba input,.ba select{font:inherit;color:var(--ink);margin:0}
+.ba h1,.ba h2,.ba h3{color:inherit}
+.ba-mu{color:var(--slate);font-size:12.5px}
+.ba-hd{background:#14213D;color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:8px;border-radius:21px 21px 0 0}
+.ba-hd h1{margin:0;font-size:17px;font-weight:800;letter-spacing:.4px}
+.ba-hd .ba-sub{color:#AEB9D1;font-size:12px;margin-top:2px}
+.ba-hr{display:flex;align-items:center;gap:6px}
+.ba .ba-sel{background:#22325A;color:#fff;border:0;border-radius:16px;padding:6px 8px;font-size:12px;font-weight:600;max-width:150px;width:auto}
+.ba .ba-theme{font-size:16px;padding:4px}
+.ba-main{flex:1}
+.ba-pad{padding:16px}
+.ba-seg{display:flex;background:var(--seg);border-radius:12px;padding:4px;margin:16px 16px 0}
+.ba .ba-seg button{flex:1;padding:9px 0;border-radius:9px;font-size:13px;font-weight:600;color:var(--slate)}
+.ba .ba-seg button.on{background:var(--btn-ink);color:var(--btn-ink-text)}
+.ba-hero{background:var(--hero);color:var(--hero-text);border-radius:16px;padding:18px}
+.ba-hero .l{color:var(--hero-sub);font-size:13px}.ba-hero .v{font-size:30px;font-weight:800;margin-top:4px}
+.ba-bar{height:6px;background:rgba(255,255,255,.18);border-radius:3px;margin-top:14px;overflow:hidden}
+.ba-bar i{display:block;height:100%;background:var(--saffron);border-radius:3px;transition:width .4s}
+.ba-hero .s{color:var(--hero-sub);font-size:12px;margin-top:8px}
+.ba-mini{display:flex;gap:10px;margin-top:10px}
+.ba-mini div{flex:1;background:var(--card);border-radius:12px;padding:14px;border-left:4px solid}
+.ba-mini b{display:block;font-size:19px;font-weight:800;margin-top:4px}
+.ba h2.ba-h2{font-size:15px;font-weight:700;margin:20px 0 8px}
+.ba .ba-row{width:100%;text-align:left;display:flex;align-items:center;gap:12px;background:var(--card);border-radius:12px;padding:14px;margin-bottom:8px}
+.ba-row .m{flex:1;min-width:0}
+.ba-row .vn{font-weight:700;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ba-row .rt{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.ba-row .amt{font-weight:800;font-size:16px}
+.ba-row .tags{display:flex;gap:6px;align-items:center}
+.ba-pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:20px;font-size:11.5px;font-weight:700;white-space:nowrap}
+.ba-pill:before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;margin-right:6px}
+.ba .verified{color:var(--green);background:var(--green-bg)}.ba .pending{color:var(--orange);background:var(--orange-bg)}.ba .flagged{color:var(--red);background:var(--red-bg)}
+.ba-empty{text-align:center;color:var(--slate);padding:30px 10px}
+.ba-note{color:var(--slate);font-size:11.5px;margin-top:14px;line-height:1.4}
+.ba-nav{display:flex;background:var(--card);border-top:1px solid var(--line);position:sticky;bottom:0;border-radius:0 0 21px 21px}
+.ba .ba-nav button{flex:1;padding:12px 0 10px;color:var(--slate);font-size:14px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.ba .ba-nav button.on{color:var(--ink);font-weight:700;background:none}
+.ba-nav button:after{content:"";height:3px;width:28px;border-radius:2px}
+.ba-nav button.on:after{background:var(--saffron)}
+.ba label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink)}
+.ba-fld{margin-bottom:14px}
+.ba .ba-inp{width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 12px;font-size:15px}
+.ba .ba-inp.bad{border-color:var(--red)}
+.ba :focus-visible{outline:2px solid var(--saffron);outline-offset:2px}
+.ba-err{color:var(--red);font-size:12px;margin-top:4px}
+.ba-two{display:flex;gap:10px}.ba-two>div{flex:1}
+.ba-chips{display:flex;flex-wrap:wrap;gap:8px}
+.ba .ba-chip{padding:8px 14px;border-radius:18px;background:var(--card);border:1px solid var(--line);font-size:13px;font-weight:600}
+.ba .ba-chip.on{background:var(--btn-ink);color:var(--btn-ink-text);border-color:var(--btn-ink)}
+.ba .ba-drop{display:block;text-align:center;border:1.5px dashed var(--slate);border-radius:12px;padding:18px;background:var(--card);cursor:pointer;font-weight:400}
+.ba .ba-drop.bad{border-color:var(--red)}.ba-drop b{display:block;margin-top:4px}
+.ba-pdf{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;position:relative}
+.ba-pdf object,.ba-pdf iframe{width:100%;height:100%;border:0;display:block}
+.ba-inv{height:100%;overflow:auto;background:#fff;color:#1b2333;padding:16px;font-size:12px}
+.ba-inv h3{margin:0 0 2px;font-size:15px}.ba-inv table{width:100%;border-collapse:collapse;margin:10px 0}
+.ba-inv td,.ba-inv th{padding:5px 4px;border-bottom:1px solid #e6e9f0;text-align:left;color:#1b2333}.ba-inv td:last-child,.ba-inv th:last-child{text-align:right}
+.ba-tot{font-weight:800;font-size:14px;text-align:right}
+.ba-demo{position:absolute;top:8px;right:8px;background:#FDEBD6;color:#C9701A;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px}
+.ba-fb{padding:20px;text-align:center;background:#fff;color:#1b2333;height:100%;display:flex;align-items:center;justify-content:center}
+.ba .ba-btn{width:100%;padding:14px;border-radius:12px;font-weight:700;font-size:14.5px;color:#fff}
+.ba .ba-btn.ink{background:var(--btn-ink);color:var(--btn-ink-text)}.ba .ba-btn.g{background:#1E8E5A}.ba .ba-btn.ba-red{background:#C63A3A}
+.ba .ba-btn:disabled{opacity:.4;cursor:not-allowed}
+.ba-wrap{position:fixed;inset:0;z-index:20;background:var(--bg-out)}
+.ba-modal{position:relative;height:100%;max-width:440px;margin:0 auto;background:var(--paper);display:flex;flex-direction:column;animation:ba-up .22s ease-out}
+@keyframes ba-up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@media(prefers-reduced-motion:reduce){.ba-modal,.ba-sheet{animation:none}}
+.ba-mh{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--card);border-bottom:1px solid var(--line)}
+.ba .ba-mh .back{font-weight:600;font-size:16px}.ba-mh .id{font-weight:800}
+.ba-big{font-size:28px;font-weight:800;margin-bottom:8px}
+.ba-dr{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line)}.ba-dr b{font-weight:600;text-align:right}
+.ba .ba-ah{width:100%;display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.ba-ai{display:flex;gap:10px;padding:8px 0 8px 14px;margin-left:4px;border-left:2px solid var(--line);position:relative}
+.ba-ai:before{content:"";position:absolute;left:-6px;top:14px;width:10px;height:10px;border-radius:50%;background:var(--saffron)}
+.ba-acts{display:flex;gap:10px;padding:12px;background:var(--card);border-top:1px solid var(--line);align-items:center}.ba-acts .ba-btn{flex:1}
+.ba .ba-chatb{position:relative;width:48px;height:48px;border-radius:12px;background:var(--paper);font-size:20px;flex:none}
+.ba-chatb span{position:absolute;top:-4px;right:-4px;background:var(--saffron);color:#14213D;font-size:11px;font-weight:800;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center}
+.ba-scrim{position:absolute;inset:0;background:var(--scrim);display:flex;align-items:flex-end;z-index:30}
+.ba-sheet{width:100%;background:var(--card);border-radius:20px 20px 0 0;padding:16px;animation:ba-up .2s ease-out}
+.ba-sheet h3{margin:0 0 10px;font-size:16px}
+.ba .ba-reason{display:block;width:100%;text-align:left;padding:14px 0;border-top:1px solid var(--line);font-weight:600}
+.ba .ba-reason:hover{color:var(--red)}
+.ba-chat{height:430px;max-height:60vh;display:flex;flex-direction:column}
+.ba-msgs{flex:1;overflow-y:auto;display:flex;flex-direction:column}
+.ba-bub{max-width:82%;padding:10px;border-radius:14px;margin-bottom:8px;line-height:1.35}
+.ba-bub small{display:block;font-size:11px;opacity:.7;margin-bottom:3px;color:inherit}
+.ba-bub.me{align-self:flex-end;background:var(--btn-ink);color:var(--btn-ink-text);border-bottom-right-radius:4px}
+.ba-bub.ot{align-self:flex-start;background:var(--paper);border-bottom-left-radius:4px}
+.ba-send{display:flex;gap:8px;margin-top:8px}.ba-send .ba-btn{width:auto;padding:0 18px}
+.ba-rk{display:inline-block;padding:3px 8px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
+.ba .ba-rk.low{color:var(--green);background:var(--green-bg)}.ba .ba-rk.med{color:var(--orange);background:var(--orange-bg)}.ba .ba-rk.high{color:var(--red);background:var(--red-bg)}
+.ba-attn{display:flex;align-items:center;gap:8px;margin-top:10px;padding:10px 14px;border-radius:12px;background:var(--red-bg);color:var(--red);font-size:13px;font-weight:600}
+.ba-rcard{background:var(--card);border-radius:12px;padding:14px;margin:4px 0 8px;border-left:4px solid var(--green)}
+.ba-rcard.med{border-color:var(--orange)}.ba-rcard.high{border-color:var(--red)}
+.ba-rh{display:flex;justify-content:space-between;align-items:center}
+.ba-rs{font-size:26px;font-weight:800;line-height:1.1}.ba-rs small{font-size:13px;color:var(--slate);font-weight:600}
+.ba-rbar{height:6px;background:var(--line);border-radius:3px;margin-top:10px;overflow:hidden}
+.ba-rbar i{display:block;height:100%;background:var(--green);border-radius:3px}
+.ba-rcard.med .ba-rbar i{background:var(--orange)}.ba-rcard.high .ba-rbar i{background:var(--red)}
+.ba-rr{list-style:none;margin:10px 0 0;padding:0}
+.ba-rr li{display:flex;gap:10px;padding:7px 0;border-top:1px solid var(--line);font-size:13px;line-height:1.35}
+.ba-rr li b{flex:none;color:var(--red);min-width:30px}
+</style></head><body>
+<div id="app"></div><div id="toast" role="status"></div>
+<script>
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const H={Dashboard:'डैशबोर्ड',Notifications:'सरकारी सूचनाएँ',Sanitation:'क्षेत्र स्वच्छता','Vehicle Tracking':'वाहन ट्रैकिंग','Submit Complaint':'शिकायत दर्ज करें','My Complaints':'मेरी शिकायतें','AI Document Intelligence':'एआई दस्तावेज़ विश्लेषण',Complaints:'शिकायत प्रबंधन','Daily Schedule':'दैनिक संग्रह',Submit:'जमा करें',Publish:'प्रकाशित करें',Logout:'लॉग आउट',Title:'शीर्षक',Category:'श्रेणी',Description:'विवरण',Locality:'इलाका','Bill Audit':'बिल ऑडिट'};
+const t=k=>S.lang==='hi'&&H[k]||k;
+const WARDS={24:{n:'Ward 24 – Malviya Nagar',sup:{n:'R. K. Meena',d:'Sanitation Supervisor',id:'DEMO-S24'},staff:[{n:'Sunita Devi',id:'DEMO-W241',d:'Cleaning Staff',sh:'6:00–14:00'},{n:'Mohan Lal',id:'DEMO-W242',d:'Sweeper',sh:'6:00–14:00'}],v:{reg:'RJ14-DEMO-2401',ty:'Tipper Truck',dr:'Ramesh Saini',did:'DEMO-D24',st:'On Route'},stops:[['Gate 1 Market','07:00'],['Sector 3 Park','07:20'],['Jawahar Circle Lane','07:45'],['Malviya Nagar Metro','08:10']]},
+12:{n:'Ward 12 – Mansarovar',sup:{n:'S. Chauhan',d:'Sanitation Supervisor',id:'DEMO-S12'},staff:[{n:'Geeta Kumari',id:'DEMO-W121',d:'Cleaning Staff',sh:'6:30–14:30'}],v:{reg:'RJ14-DEMO-1202',ty:'Auto Tipper',dr:'Dinesh Yadav',did:'DEMO-D12',st:'Scheduled'},stops:[['Shipra Path Gate','07:30'],['Sector 5 Market','07:55'],['Metro Station Road','08:25']]},
+35:{n:'Ward 35 – Vaishali Nagar',sup:{n:'A. Bhati',d:'Sanitation Supervisor',id:'DEMO-S35'},staff:[{n:'Kamla Bai',id:'DEMO-W351',d:'Cleaning Staff',sh:'6:00–14:00'}],v:{reg:'RJ14-DEMO-3503',ty:'Compactor',dr:'Vijay Singh',did:'DEMO-D35',st:'Completed'},stops:[['Amrapali Circle','06:45'],['Gandhi Path Lane','07:15']]}};
+const CATS=['Garbage Not Collected','Garbage Vehicle Late','Illegal Garbage Dumping','Cleaning Staff Misconduct','Driver Misconduct','Street Cleaning','Drainage and Sewerage','Water Supply','Public Infrastructure','Other Municipal Issues'];
+const STAT=['Submitted','Under Review','Assigned','In Progress','Resolved','Rejected','Reopened'];
+const NAV={citizen:['Dashboard','Notifications','Sanitation','Vehicle Tracking','Submit Complaint','My Complaints'],admin:['Dashboard','AI Document Intelligence','Complaints','Bill Audit'],sup:['Daily Schedule','Bill Audit']};
+const today=()=>new Date().toISOString().slice(0,10);
+const seed=()=>({role:null,page:'Dashboard',ward:24,lang:'en',q:'',docs:0,
+notifs:[{id:1,title:'Sample: Door-to-door waste segregation drive',type:'Sanitation Notice',dept:'Sanitation (demo)',ref:'DEMO/SAN/001',date:'2026-10-01',wards:[24,12,35],summary:'Fictional demo notice about segregating wet and dry waste.',status:'Demo Data',read:false,bm:false}],
+complaints:[],prog:{24:1,12:0,35:2},notes:{},cur:null});
+let S;try{S=JSON.parse(localStorage.getItem('jai')||'null')||seed()}catch(e){S=seed()}
+let D={file:null,url:null,prog:0,fields:null,ok:false,wards:[],err:''};
+const save=()=>{try{localStorage.setItem('jai',JSON.stringify(S))}catch(e){}};
+const toast=m=>{const e=document.getElementById('toast');e.textContent=m;e.style.display='block';setTimeout(()=>e.style.display='none',3500)};
+const go=(p)=>{S.page=p;R()};const setW=v=>{S.ward=+v;R()};
+function login(r){S.role=r;S.page=NAV[r][0];R()}
+function logout(){S.role=null;R()}
+const myN=()=>S.notifs.filter(n=>n.wards.includes(S.ward));
+const unread=()=>myN().filter(n=>!n.read).length;
+function wsel(){return `<select aria-label="Ward" onchange="setW(this.value)" style="width:auto">${Object.keys(WARDS).map(k=>`<option value="${k}" ${+k===S.ward?'selected':''}>${WARDS[k].n}</option>`).join('')}</select>`}
+function R(){save();const a=document.getElementById('app');
+if(!S.role){a.innerHTML=`<main style="max-width:520px"><div class="card"><div class="logo">👁️ JANDRISHTI AI</div><p class="tag">Smart Governance. Clean Cities. Informed Citizens.</p><p>Choose a demo role. Demo login only: no real OTP or credentials, and frontend roles are <b>not</b> production security.</p><div class="row"><button class="p" onclick="login('citizen')">Citizen</button><button class="p" onclick="login('admin')">Municipal Administrator</button><button class="p" onclick="login('sup')">Sanitation Supervisor</button></div></div><div class="banner">All data is fictional. OCR/AI results are simulated. GPS, SMS and authentication need backend integrations.</div></main>`;return}
+const bell=S.role==='citizen'?`<span class="b" title="Unread notifications">🔔 ${unread()}</span>`:'';
+a.innerHTML=`<header><div class="logo">👁️ JANDRISHTI AI</div><span class="tag">${S.role==='citizen'?'Citizen':S.role==='admin'?'Administrator':'Supervisor'} (demo)</span><span style="flex:1"></span>${bell}<button onclick="S.lang=S.lang==='en'?'hi':'en';R()">${S.lang==='en'?'हिन्दी':'English'}</button><button onclick="logout()">${t('Logout')}</button></header>
+<nav aria-label="Main">${NAV[S.role].map(p=>`<button class="${p===S.page?'on':''}" onclick="go('${p}')">${t(p)}</button>`).join('')}</nav><main>${page()}</main>`;}
+function page(){const k=S.role+':'+S.page;const m={'citizen:Dashboard':cDash,'citizen:Notifications':cNot,'citizen:Sanitation':san,'citizen:Vehicle Tracking':track,'citizen:Submit Complaint':form,'citizen:My Complaints':mine,'admin:Dashboard':aDash,'admin:AI Document Intelligence':ai,'admin:Complaints':aComp,'sup:Daily Schedule':sup,'admin:Bill Audit':billPage,'sup:Bill Audit':billPage};return (m[k]||(()=>''))()}
+function sched(w){const W_=WARDS[w],p=S.prog[w];return `<div class="tbl">${W_.stops.map((s,i)=>`<div class="row"><span>${i<p?'✅':'⬜'}</span><b>${esc(s[1])}</b> ${esc(s[0])}</div>`).join('')}</div>`}
+function cDash(){const w=WARDS[S.ward],mc=S.complaints,op=mc.filter(c=>!['Resolved','Rejected'].includes(c.status)).length;
+return `<h2>Namaste, Citizen 👋</h2><div class="row"><span>Ward:</span>${wsel()}</div><br><div class="grid"><div class="card stat"><b>${unread()}</b>Unread notifications</div><div class="card stat"><b>${op}</b>Open complaints</div><div class="card stat"><b>${mc.length-op}</b>Resolved/closed</div></div>
+<div class="card"><h3>Today's collection – ${esc(w.n)}</h3><small>Simulated schedule</small>${sched(S.ward)}</div>
+<div class="card"><h3>Latest announcements</h3>${myN().slice(-3).reverse().map(n=>`<p><b>${esc(n.title)}</b> <span class="b ${n.status==='Demo Data'?'w':''}">${esc(n.status)}</span><br><small>${esc(n.date)} · ${esc(n.dept)}</small></p>`).join('')||'<small>No notifications for this ward.</small>'}</div>
+<div class="row"><button onclick="go('Notifications')">View Notifications</button><button onclick="go('Sanitation')">Sanitation Staff</button><button onclick="go('Vehicle Tracking')">Track Vehicle</button><button class="p" onclick="go('Submit Complaint')">Submit Complaint</button><button onclick="go('My Complaints')">Track Complaints</button></div>`}
+function cNot(){const q=S.q.toLowerCase();const l=myN().filter(n=>(n.title+n.summary+n.type).toLowerCase().includes(q)).reverse();
+return `<h2>${t('Notifications')}</h2><div class="row">${wsel()}<input aria-label="Search" placeholder="Search notifications…" value="${esc(S.q)}" onchange="S.q=this.value;R()" style="flex:1"></div>
+${l.map(n=>`<div class="card"><b>${n.read?'':'🔵 '}${esc(n.title)}</b> <span class="b ${n.status==='Demo Data'?'w':'ok'}">${esc(n.status)}</span><br><small>${esc(n.type)} · ${esc(n.dept)} · Ref ${esc(n.ref)} · ${esc(n.date)}</small><p>${esc(n.summary)}</p><button onclick="rd(${n.id})">${n.read?'Mark unread':'Mark read'}</button> <button onclick="bm(${n.id})">${n.bm?'★ Bookmarked':'☆ Bookmark'}</button></div>`).join('')||'<div class="card">No matching notifications.</div>'}`}
+const rd=id=>{const n=S.notifs.find(x=>x.id===id);n.read=!n.read;R()},bm=id=>{const n=S.notifs.find(x=>x.id===id);n.bm=!n.bm;R()};
+function san(){const w=WARDS[S.ward],v=w.v;return `<h2>${t('Sanitation')}</h2>${wsel()}<div class="banner">Fictional demo records. Private contact details are never shown.</div>
+<div class="card"><h3>Supervisor</h3>${esc(w.sup.n)} · ${esc(w.sup.d)} · ${esc(w.sup.id)}</div>
+<div class="card"><h3>Cleaning staff</h3>${w.staff.map(s=>`<p>${esc(s.n)} (${esc(s.id)}) · ${esc(s.d)} · Shift ${esc(s.sh)}</p>`).join('')}</div>
+<div class="card"><h3>Garbage vehicle</h3><p>${esc(v.reg)} · ${esc(v.ty)} · Driver ${esc(v.dr)} (${esc(v.did)})<br>Status: <span class="b">${esc(v.st)}</span> · Window ${esc(w.stops[0][1])}–${esc(w.stops.at(-1)[1])}</p>${sched(S.ward)}</div>`}
+function track(){const w=WARDS[S.ward],p=S.prog[S.ward],n=w.stops.length;return `<h2>${t('Vehicle Tracking')}</h2>${wsel()}<div class="banner">DEMO TRACKING — Live GPS is not connected. Positions are simulated.</div>
+<div class="card"><b>${esc(w.v.reg)}</b> · ${esc(w.v.st)} · ${today()}<div style="background:var(--bd);border-radius:6px;margin:8px 0"><div class="bar" style="width:${p/n*100}%;background:var(--green)"></div></div>${p}/${n} stops completed (simulated)${sched(S.ward)}<small>Map unavailable in this build; route shown as stop list.</small></div>`}
+function form(){return `<h2>${t('Submit Complaint')}</h2><div class="card"><label>${t('Title')}</label><input id="f_t" maxlength="100"><label>${t('Category')}</label><select id="f_c">${CATS.map(c=>`<option>${c}</option>`).join('')}</select><label>${t('Description')}</label><textarea id="f_d" rows="4"></textarea><label>Ward</label>${wsel()}<label>${t('Locality')}</label><input id="f_l"><label>Photo (optional, image ≤5MB)</label><input type="file" id="f_f" accept="image/*"><p id="f_e" class="r" style="color:var(--red)"></p><button class="p" onclick="addC()">${t('Submit')}</button></div>`}
+function addC(){const g=i=>document.getElementById(i),ti=g('f_t').value.trim(),de=g('f_d').value.trim(),lo=g('f_l').value.trim(),f=g('f_f').files[0];let e='';
+if(ti.length<5)e='Title needs at least 5 characters.';else if(de.length<10)e='Description needs at least 10 characters.';else if(!lo)e='Locality is required.';else if(f&&(!f.type.startsWith('image/')||f.size>5e6))e='Attachment must be an image under 5MB.';
+if(e){g('f_e').textContent=e;return}
+const id='JAI-2026-'+String(124+S.complaints.length).padStart(5,'0');
+S.complaints.push({id,title:ti,cat:g('f_c').value,desc:de,ward:S.ward,loc:lo,status:'Submitted',date:today(),prio:/not collected|dumping/i.test(g('f_c').value)?'High':'Medium',dept:'Unassigned',resp:'',tl:[{s:'Submitted',d:today(),m:'Complaint received.'}],notes:[]});
+toast('Complaint submitted. ID: '+id);S.page='My Complaints';R()}
+function mine(){return `<h2>${t('My Complaints')}</h2>${S.complaints.map(c=>`<div class="card"><b>${esc(c.id)}</b> · ${esc(c.title)} <span class="b ${c.status==='Resolved'?'ok':c.status==='Rejected'?'r':''}">${esc(c.status)}</span><br><small>${esc(c.cat)} · ${esc(c.date)} · Priority ${esc(c.prio)} · ${esc(c.dept)}</small>${c.resp?`<p><b>Official response:</b> ${esc(c.resp)}</p>`:''}<div class="tl">${c.tl.map(e=>`<div>${esc(e.d)} – <b>${esc(e.s)}</b>: ${esc(e.m)}</div>`).join('')}</div></div>`).join('')||'<div class="card">You have not submitted any complaints yet.</div>'}`}
+function aDash(){const c=S.complaints,op=c.filter(x=>!['Resolved','Rejected'].includes(x.status)).length,by={};c.forEach(x=>by[x.cat]=(by[x.cat]||0)+1);const mx=Math.max(1,...Object.values(by));
+return `<h2>Administrator Dashboard</h2><div class="grid"><div class="card stat"><b>${S.docs}</b>Documents processed</div><div class="card stat"><b>${S.notifs.length}</b>Published notifications</div><div class="card stat"><b>${c.length}</b>Total complaints</div><div class="card stat"><b>${op}</b>Open</div><div class="card stat"><b>${c.length-op}</b>Resolved</div><div class="card stat"><b>3</b>Demo vehicles</div><div class="card stat"><b>${(S.bills||[]).filter(x=>x.status==='pending').length}</b>Bills awaiting audit</div></div>
+<div class="card"><h3>Complaints by category</h3>${Object.entries(by).map(([k,v])=>`<div class="row"><span style="width:190px">${esc(k)}</span><div class="bar" style="width:${v/mx*50}%;min-width:8px"></div> ${v}</div>`).join('')||'<small>No complaints yet.</small>'}</div>`}
+function ai(){let h=`<h2>${t('AI Document Intelligence')}</h2><div class="banner">SIMULATED AI: no OCR/LLM is connected. Values below are demo examples, not read from your file. Nothing is verified until a human approves it.</div>
+<div class="card"><div class="drop" ondragover="event.preventDefault()" ondrop="event.preventDefault();pick(event.dataTransfer.files[0])"><p>Drag &amp; drop PDF/JPG/PNG (max 10MB)</p><input type="file" accept=".pdf,.jpg,.jpeg,.png" onchange="pick(this.files[0])" aria-label="Choose file"></div>${D.err?`<p style="color:var(--red)">${esc(D.err)}</p>`:''}`;
+if(D.file){h+=`<p><b>${esc(D.file.name)}</b> · ${(D.file.size/1024).toFixed(0)} KB · ${esc(D.file.type)} <button onclick="clr()">Remove</button></p>${D.file.type.startsWith('image/')?`<img src="${D.url}" alt="Preview" style="max-width:100%;max-height:240px">`:`<object data="${D.url}" type="application/pdf" width="100%" height="260"><small>Preview not supported in this browser.</small></object>`}`;
+const st=['Uploaded','OCR / Text Extraction','Classification','Field Extraction','Validation','Summary','Human Review','Approval & Publication'];const n=D.fields?(D.ok?8:7):Math.floor(D.prog/100*5);
+h+=`<div style="margin:8px 0">${st.map((s,i)=>`<span class="stage ${i<n?'d':''}">${s}</span>`).join('')}</div>`;if(!D.fields)h+=`<div style="background:var(--bd);border-radius:6px"><div class="bar" style="width:${D.prog}%"></div></div>`}
+h+='</div>';
+if(D.fields){h+=`<div class="card"><h3>Extracted fields (simulated) — editable</h3><p>Classification: <span class="b">Municipal Notification</span> <small>(simulated)</small></p>${D.fields.map((f,i)=>`<label>${esc(f.k)} · confidence ${f.c}% (simulated) · <span class="b ${f.s==='Validated'?'ok':'w'}">${esc(f.s)}</span></label><input value="${esc(f.v)}" onchange="D.fields[${i}].v=this.value;D.fields[${i}].s='Validated'">`).join('')}<p><b>AI summary (simulated):</b> Demo summary of "${esc(D.file.name)}": notice for selected wards, review required before publication.</p>
+<div class="row"><button class="g" onclick="D.ok=true;R()">Approve document</button><button onclick="D.fields=null;D.ok=false;toast('Document rejected');R()">Reject</button></div>
+${D.ok?`<h3>Target wards</h3>${Object.keys(WARDS).map(k=>`<label><input type="checkbox" style="width:auto" ${D.wards.includes(+k)?'checked':''} onchange="tw(${k})"> ${WARDS[k].n}</label><br>`).join('')}<br><button class="p" onclick="pub()">${t('Publish')}</button>`:'<small>Approve the document to select wards and publish.</small>'}</div>`}
+return h}
+function pick(f){D.err='';if(!f)return;const ok=/\.(pdf|jpe?g|png)$/i.test(f.name)&&['application/pdf','image/jpeg','image/png'].includes(f.type);
+if(!ok){D.err='Unsupported file. Use PDF, JPG or PNG.';R();return}if(f.size>1e7){D.err='File exceeds 10MB.';R();return}
+D.file=f;D.url=URL.createObjectURL(f);D.fields=null;D.ok=false;D.wards=[];D.prog=0;const iv=setInterval(()=>{D.prog+=20;if(D.prog>=100){clearInterval(iv);const nm=f.name.replace(/\.[^.]+$/,'');D.fields=[['Document title',nm,86,'Needs Review'],['Issuing authority','Municipal Corporation (demo)',72,'Low Confidence'],['Department','Sanitation',90,'Validated'],['Reference number','DEMO/'+today().slice(0,4)+'/0001',64,'Low Confidence'],['Issue date',today(),88,'Validated'],['Required action','Segregate waste by Nov 30',70,'Needs Review']].map(a=>({k:a[0],v:a[1],c:a[2],s:a[3]}))}R()},400);R()}
+function clr(){D={file:null,url:null,prog:0,fields:null,ok:false,wards:[],err:''};R()}
+function tw(k){D.wards=D.wards.includes(k)?D.wards.filter(x=>x!==k):[...D.wards,k]}
+function pub(){if(!D.wards.length){toast('Select at least one ward.');return}const g=k=>D.fields.find(f=>f.k===k).v;
+S.notifs.push({id:Date.now(),title:g('Document title'),type:'Municipal Notice',dept:g('Department'),ref:g('Reference number'),date:g('Issue date'),wards:D.wards,summary:'Admin-approved demo notice. Required action: '+g('Required action'),status:'Demo Data',read:false,bm:false});S.docs++;
+toast('Published to '+D.wards.length+' ward(s). Switch to Citizen to see it.');clr()}
+function aComp(){return `<h2>${t('Complaints')}</h2>${S.complaints.map((c,i)=>`<div class="card"><b>${esc(c.id)}</b> · ${esc(c.title)} <span class="b">${esc(c.status)}</span><br><small>${esc(c.cat)} · ${esc(WARDS[c.ward].n)} · ${esc(c.loc)} · Priority ${esc(c.prio)}</small><p>${esc(c.desc)}</p>
+<div class="row"><select id="s${i}">${STAT.map(s=>`<option ${s===c.status?'selected':''}>${s}</option>`).join('')}</select><select id="d${i}">${['Unassigned','Sanitation','Drainage','Water Supply','Public Works'].map(s=>`<option ${s===c.dept?'selected':''}>${s}</option>`).join('')}</select></div>
+<label>Citizen-visible response</label><textarea id="r${i}" rows="2">${esc(c.resp)}</textarea><label>Internal note (never shown to citizen)</label><textarea id="n${i}" rows="2"></textarea><button class="p" onclick="upd(${i})">Update</button>${c.notes.map(n=>`<br><small>🔒 ${esc(n)}</small>`).join('')}</div>`).join('')||'<div class="card">No complaints submitted yet. Submit one as Citizen first.</div>'}`}
+function upd(i){const c=S.complaints[i],g=p=>document.getElementById(p+i).value.trim();c.status=g('s');c.dept=g('d');c.resp=g('r');const n=g('n');if(n)c.notes.push(n);
+c.tl.push({s:c.status,d:today(),m:c.resp||'Status updated.'});S.notifs.push({id:Date.now(),title:'Complaint '+c.id+' is now '+c.status,type:'Complaint Update',dept:c.dept,ref:c.id,date:today(),wards:[c.ward],summary:c.resp||'Status updated.',status:'Demo Data',read:false,bm:false});toast('Complaint updated; citizen view refreshed.');R()}
+function sup(){const w=WARDS[S.ward],p=S.prog[S.ward];return `<h2>${t('Daily Schedule')}</h2>${wsel()}<div class="banner">Simulated operational data.</div><div class="card"><p>Staff: ${w.staff.map(s=>esc(s.n)).join(', ')} · Vehicle ${esc(w.v.reg)}</p>${sched(S.ward)}<p>${p}/${w.stops.length} completed · ${w.stops.length-p} pending</p><button class="g" onclick="adv(1)">Mark next stop done</button> <button onclick="adv(-1)">Undo</button><label>Operational note</label><input id="on" value="${esc(S.notes[S.ward]||'')}" onchange="S.notes[S.ward]=this.value;save();toast('Note saved')"></div><div class="card"><h3>Assigned complaints</h3>${S.complaints.filter(c=>c.ward===S.ward).map(c=>`<p>${esc(c.id)} · ${esc(c.title)} · ${esc(c.status)}</p>`).join('')||'<small>None.</small>'}</div>`}
+function adv(d){const n=WARDS[S.ward].stops.length;S.prog[S.ward]=Math.max(0,Math.min(n,S.prog[S.ward]+d));R()}
+/* ===== BILL AUDIT MODULE (Administrator = auditor, Supervisor = submitter) – restyled + AI risk score ===== */
+const BCATS=['Sanitation','Drainage','Water Supply','Public Works','Street Lighting','Events','Other'];
+const BREASONS=['Amount mismatch','Blurry scan','Wrong date','Invoice number mismatch','Vendor not registered','Other'];
+const BALLOC={day:20000,week:125000,month:500000};
+const BST={verified:'Verified',pending:'Pending',flagged:'Flagged / Recheck'};
+const BLV={low:'Low risk',med:'Medium risk',high:'High risk'};
+const AUTO_FLAG_AT=50;
+const BHOL={'01-26':'Republic Day','08-15':'Independence Day','10-02':'Gandhi Jayanti','12-25':'Christmas'};
+const ADM='Municipal Administrator (Auditor)';
+const sbn=w=>WARDS[w].sup.n+' (Supervisor)';
+const biso=d=>new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const dAgo=n=>{const d=new Date();d.setDate(d.getDate()-n);return biso(d)};
+const lastSun=()=>{const d=new Date();d.setDate(d.getDate()-d.getDay());return biso(d)};
+const inr=n=>'₹'+Number(n).toLocaleString('en-IN');
+const stamp=()=>new Date().toLocaleString('en-IN',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
+const fdate=s=>new Date(s+'T00:00:00').toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+const BU={},BT={};
+const bf0=()=>({vendor:'',inv:'',date:biso(new Date()),amount:'',cat:'Sanitation',file:null});
+let B={view:'week',tab:'ledger',wf:'all',open:null,ov:null,aud:false,form:bf0(),err:{},focus:false};
+
+/* ---- AI risk engine ---- */
+function bscore(b){
+ const others=S.bills.filter(x=>x.id!==b.id),rs=[],add=(p,tx)=>rs.push({p,t:tx});
+ const nk=s=>String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+ const dups=others.filter(x=>nk(x.inv)===nk(b.inv));
+ if(dups.length){const sv=dups.filter(x=>nk(x.vendor)===nk(b.vendor));
+  if(sv.length)add(50,`Duplicate invoice no. ${b.inv} – already filed by this vendor (${sv[0].id})`);
+  else add(30,`Invoice no. ${b.inv} is also used by ${dups[0].vendor} (${dups[0].id})`)}
+ const vs=others.filter(x=>nk(x.vendor)===nk(b.vendor)),pool=vs.length?vs:others.filter(x=>x.cat===b.cat);
+ if(pool.length){const avg=pool.reduce((s,x)=>s+x.amount,0)/pool.length,ratio=b.amount/avg;
+  const basis=(vs.length?'this vendor':`the ${b.cat} category`)+` (${pool.length} other bill${pool.length>1?'s':''})`;
+  const m=`${inr(b.amount)} is ${ratio.toFixed(1)}× the average ${inr(Math.round(avg))} for ${basis}`;
+  if(ratio>=3)add(40,m);else if(ratio>=2)add(25,m)}
+ const d=new Date(b.date+'T00:00:00'),t0=new Date();t0.setHours(0,0,0,0);const diff=Math.round((t0-d)/864e5);
+ if(diff<0)add(40,`Dated ${-diff} day${diff<-1?'s':''} in the future (${fdate(b.date)})`);
+ else if(d.getMonth()!==t0.getMonth()||d.getFullYear()!==t0.getFullYear())add(diff>30?25:10,`Dated ${fdate(b.date)} (${diff} days ago) – outside the current billing month`);
+ const dow=d.getDay();if(dow===0||dow===6)add(15,`Dated on a ${dow===0?'Sunday':'Saturday'} – offices are normally closed`);
+ const hol=BHOL[b.date.slice(5)];if(hol)add(20,`Dated on a public holiday (${hol})`);
+ const score=Math.min(100,rs.reduce((s,r)=>s+r.p,0));
+ return {score,level:score>=AUTO_FLAG_AT?'high':score>=25?'med':'low',reasons:rs}}
+const brk=r=>`<span class="ba-rk ${r.level}">Risk ${r.score}</span>`;
+const brcard=r=>`<div class="ba-rcard ${r.level}"><div class="ba-rh"><div><div class="ba-mu">Audit risk score</div><div class="ba-rs">${r.score}<small> / 100</small></div></div><span class="ba-rk ${r.level}">${BLV[r.level]}</span></div><div class="ba-rbar"><i style="width:${r.score}%"></i></div>${r.reasons.length?`<ul class="ba-rr">${r.reasons.map(x=>`<li><b>+${x.p}</b><span>${esc(x.t)}</span></li>`).join('')}</ul>`:'<div class="ba-mu" style="margin-top:10px">No risk signals found.</div>'}</div>`;
+/* add a bill, score it, auto-flag when risk is high */
+function addBill(b){S.bills.unshift(b);const r=bscore(b);
+ if(r.score>=AUTO_FLAG_AT){b.status='flagged';b.audit.push({who:'Audit AI',what:'Auto-flagged – risk score '+r.score,at:stamp()});
+  b.comments.push({by:'Audit AI',text:`Auto-flagged (risk ${r.score}): `+r.reasons.map(x=>x.t).join('; ')+'.',at:stamp()})}
+ return r}
+
+function seedBills(){
+ const A=(w,v,i,d,a,c,s,cm,au)=>({id:'',ward:w,vendor:v,inv:i,date:dAgo(d),amount:a,cat:c,status:s,fname:'',comments:cm,audit:au});
+ const L=[
+  A(24,'Shree Clean Services','INV-2041',0,18500,'Sanitation','pending',[],[{who:sbn(24),what:'Submitted bill',at:dAgo(0)+' 09:12'}]),
+  A(12,'Rajasthan Roadworks','RW/884',2,64200,'Public Works','flagged',[{by:'Auditor',text:'Scan shows ₹46,200 but the form says ₹64,200. Please check.',at:dAgo(1)+' 16:05'}],[{who:sbn(12),what:'Submitted bill',at:dAgo(2)+' 10:40'},{who:ADM,what:'Flagged – Amount mismatch',at:dAgo(1)+' 16:05'}]),
+  A(24,'Jaipur Jal Suppliers','JJ-310',5,22000,'Water Supply','verified',[],[{who:sbn(24),what:'Submitted bill',at:dAgo(5)+' 11:00'},{who:ADM,what:'Verified bill',at:dAgo(5)+' 15:30'}]),
+  A(35,'BrightLine Electricals','BL-77',12,48800,'Street Lighting','verified',[],[{who:sbn(35),what:'Submitted bill',at:dAgo(12)+' 10:10'},{who:ADM,what:'Verified bill',at:dAgo(11)+' 12:00'}])];
+ L.forEach((b,i)=>b.id='BL-2026-'+String(i+1).padStart(4,'0'));return L}
+if(!S.bills){S.bills=seedBills();
+ /* demo bills that exercise the audit rules (duplicate invoice / weekend date) */
+ const dm=(w,v,i,d,a,c,at)=>({id:'BL-2026-'+String(S.bills.length+1).padStart(4,'0'),ward:w,vendor:v,inv:i,date:d,amount:a,cat:c,status:'pending',fname:'',comments:[],audit:[{who:sbn(w),what:'Submitted bill',at}]});
+ addBill(dm(24,'Shree Clean Services','INV-2041',dAgo(1),52000,'Sanitation','Yesterday, 17:48'));
+ addBill(dm(35,'Pink City Events','PCE-12',lastSun(),35000,'Events','Mon, 10:05'))}
+
+const bpill=s=>`<span class="ba-pill ${s}">${BST[s]}</span>`;
+const bInP=(s,v)=>{const t0=new Date(),d=new Date(s+'T00:00:00');if(v==='day')return s===biso(t0);if(v==='week')return (t0-d)/864e5<7&&d<=t0;return d.getMonth()===t0.getMonth()&&d.getFullYear()===t0.getFullYear()};
+const bview=(u,ty)=>!u?`<div class="ba-fb">Preview not available (file was not kept after reload).</div>`:(ty||'').startsWith('image/')?`<img src="${u}" alt="Bill scan" style="width:100%;height:100%;object-fit:contain;background:#fff">`:`<object data="${u}" type="application/pdf"><div class="ba-fb">PDF preview is not supported in this browser.</div></object>`;
+function bdoc(b,style){let h;
+ if(b.fname)h=bview(BU[b.id],BT[b.id]);
+ else h=`<div class="ba-inv"><span class="ba-demo">Demo scan</span><h3>${esc(b.vendor)}</h3><div>Invoice ${esc(b.inv)} · ${fdate(b.date)}</div><table><tr><th>Item</th><th>Amount</th></tr>${[['Service charges',.7],['Materials',.2],['Transport',.1]].map(x=>`<tr><td>${x[0]}</td><td>${inr(Math.round(b.amount*x[1]))}</td></tr>`).join('')}</table><div class="ba-tot">Total ${inr(b.amount)}</div></div>`;
+ return `<div class="ba-pdf" style="${style}">${h}</div>`}
+
+function billPage(){const adm=S.role==='admin';
+ const wsel2=adm?`<select class="ba-sel" aria-label="Ward filter" onchange="B.wf=this.value;R()"><option value="all">All wards</option>${Object.keys(WARDS).map(k=>`<option value="${k}" ${B.wf==k?'selected':''}>Ward ${k}</option>`).join('')}</select>`
+  :`<select class="ba-sel" aria-label="Ward" onchange="setW(this.value)">${Object.keys(WARDS).map(k=>`<option value="${k}" ${+k===S.ward?'selected':''}>Ward ${k}</option>`).join('')}</select>`;
+ const sub=adm?(B.wf==='all'?'All wards':WARDS[B.wf].n):WARDS[S.ward].n;
+ const nav=adm?'':`<div class="ba-nav">${[['ledger','Ledger'],['submit','Submit bill']].map(x=>`<button class="${B.tab===x[0]?'on':''}" onclick="B.tab='${x[0]}';R()">${x[1]}</button>`).join('')}</div>`;
+ return `<div class="ba"><div class="ba-hd"><div><h1>${t('Bill Audit')}</h1><div class="ba-sub">${esc(sub)} · ${adm?'Auditor':'Submitter'}</div></div><div class="ba-hr">${wsel2}<button class="ba-theme" onclick="bTheme()" aria-label="Toggle theme">🌓</button></div></div>
+<div class="ba-main">${(adm||B.tab==='ledger')?bLedger(adm):bForm()}</div>${nav}${B.open?bmodal():''}</div>`}
+function bLedger(adm){
+ const rows=S.bills.filter(b=>(adm?(B.wf==='all'||b.ward==B.wf):b.ward===S.ward)&&bInP(b.date,B.view)).sort((a,b)=>b.date.localeCompare(a.date));
+ const sp=rows.filter(b=>b.status==='verified').reduce((s,b)=>s+b.amount,0),op=rows.filter(b=>b.status!=='verified').reduce((s,b)=>s+b.amount,0);
+ const al=BALLOC[B.view]*(adm&&B.wf==='all'?Object.keys(WARDS).length:1),pc=Math.min(100,sp/al*100);
+ const hi=rows.filter(b=>b.status!=='verified'&&bscore(b).level==='high').length;
+ return `<div class="ba-seg">${[['day','Day View'],['week','Week View'],['month','Month View']].map(([k,l])=>`<button class="${B.view===k?'on':''}" onclick="B.view='${k}';R()">${l}</button>`).join('')}</div>
+<div class="ba-pad"><div class="ba-hero"><div class="l">Allocated budget</div><div class="v">${inr(al)}</div><div class="ba-bar"><i style="width:${pc}%"></i></div><div class="s">${pc.toFixed(1)}% used by verified bills</div></div>
+<div class="ba-mini"><div style="border-color:var(--green)"><span class="ba-mu">Spent (verified)</span><b style="color:var(--green)">${inr(sp)}</b></div><div style="border-color:var(--orange)"><span class="ba-mu">Pending / flagged</span><b style="color:var(--orange)">${inr(op)}</b></div></div>
+${hi?`<div class="ba-attn">⚠ ${hi} high-risk bill${hi>1?'s':''} need${hi>1?'':'s'} attention</div>`:''}
+<h2 class="ba-h2">Transactions</h2>${rows.map(b=>`<button class="ba-row" onclick="bopen('${b.id}')"><div class="m"><div class="vn">${esc(b.vendor)}</div><div class="ba-mu">${fdate(b.date)} · ${esc(b.cat)}${adm?' · Ward '+b.ward:''}</div></div><div class="rt"><div class="amt">${inr(b.amount)}</div><div class="tags">${brk(bscore(b))}${bpill(b.status)}</div></div></button>`).join('')||`<div class="ba-empty">No bills in this period.${adm?'':'<br>Submit one from the Submit bill tab.'}</div>`}
+<div class="ba-note">Fictional demo bills. Uploaded files stay in this browser tab only and are not sent to any server. Only the Administrator (auditor) can verify or flag a bill.</div></div>`}
+function bin(k,el){B.form[k]=el.value;if(B.err[k]){delete B.err[k];el.classList.remove('bad');const e=el.parentNode.querySelector('.ba-err');if(e)e.remove()}}
+function bForm(){const f=B.form,e=B.err;
+ const fld=(k,l,ty,ph,ex)=>`<div class="ba-fld"><label for="bf_${k}">${l}</label><input class="ba-inp${e[k]?' bad':''}" id="bf_${k}" type="${ty}" value="${esc(f[k])}" placeholder="${ph}" ${ex||''} oninput="bin('${k}',this)">${e[k]?`<div class="ba-err">${e[k]}</div>`:''}</div>`;
+ return `<div class="ba-pad">${fld('vendor','Vendor name','text','e.g. Shree Clean Services')}${fld('inv','Invoice no.','text','e.g. INV-2041')}
+<div class="ba-two"><div>${fld('date','Date','date','')}</div><div>${fld('amount','Amount (₹)','number','0','inputmode="decimal" min="0"')}</div></div>
+<label>Category</label><div class="ba-chips">${BCATS.map(c=>`<button type="button" class="ba-chip${f.cat===c?' on':''}" onclick="B.form.cat='${c}';R()">${c}</button>`).join('')}</div>
+<label style="margin-top:16px">Bill scan (PDF or photo)</label><label class="ba-drop${e.file?' bad':''}" for="bf_file"><span style="font-size:22px">📎</span><b>${f.file?esc(f.file.name):'Choose PDF or image'}</b>${f.file?`<span class="ba-mu">${(f.file.size/1024).toFixed(0)} KB · tap to replace</span>`:''}</label>
+<input id="bf_file" type="file" accept="application/pdf,image/*" hidden onchange="bpick(this.files[0])">
+<label class="ba-drop" for="bf_cam" style="margin-top:8px;padding:12px"><b style="margin:0">📷 Scan with camera</b></label><input id="bf_cam" type="file" accept="image/*" capture="environment" hidden onchange="bpick(this.files[0])">
+${e.file?`<div class="ba-err">${e.file}</div>`:''}
+${f.file?`<label style="margin-top:16px">Preview before submitting</label><div class="ba-pdf" style="height:320px">${bview(BU.draft,f.file.type)}</div>`:''}
+<button class="ba-btn ink" style="margin-top:20px" onclick="bsubmit()">Submit bill for review</button></div>`}
+function bpick(f){if(!f)return;
+ if(!(f.type==='application/pdf'||f.type.startsWith('image/'))){B.err.file='Use a PDF or an image scan.';R();return}
+ if(f.size>1e7){B.err.file='File exceeds 10MB.';R();return}
+ if(BU.draft)URL.revokeObjectURL(BU.draft);BU.draft=URL.createObjectURL(f);B.form.file=f;delete B.err.file;R()}
+function bsubmit(){const f=B.form,e={};
+ if(!f.vendor.trim())e.vendor='Enter the vendor name';if(!f.inv.trim())e.inv='Enter the invoice number';
+ if(!f.date||isNaN(new Date(f.date)))e.date='Pick the bill date';if(!(Number(f.amount)>0))e.amount='Enter an amount above 0';
+ if(!f.file)e.file='Attach the bill scan';B.err=e;if(Object.keys(e).length){R();return}
+ const id='BL-2026-'+String(S.bills.length+1).padStart(4,'0');BU[id]=BU.draft;BT[id]=f.file.type;delete BU.draft;
+ const r=addBill({id,ward:S.ward,vendor:f.vendor.trim(),inv:f.inv.trim(),date:f.date,amount:Number(f.amount),cat:f.cat,status:'pending',fname:f.file.name,comments:[],audit:[{who:sbn(S.ward),what:'Submitted bill',at:stamp()}]});
+ B.form=bf0();B.err={};B.tab='ledger';B.view='month';
+ toast(r.score>=AUTO_FLAG_AT?`Bill ${id} auto-flagged by audit (risk ${r.score}). The Administrator will review it.`:`Bill ${id} submitted. The Administrator will review it.`);R()}
+function bmodal(){const b=bcur();if(!b){B.open=null;return''}const adm=S.role==='admin';
+ const audit=B.aud?b.audit.map(a=>`<div class="ba-ai"><div><b>${esc(a.what)}</b><div class="ba-mu">${esc(a.who)} · ${esc(a.at)}</div></div></div>`).join(''):'';
+ const acts=adm?`<button class="ba-btn ba-red" onclick="B.ov='flag';R()" ${b.status==='flagged'?'disabled':''}>Flag for Recheck</button><button class="ba-btn g" onclick="bapprove()" ${b.status==='verified'?'disabled':''}>Approve &amp; Verify</button>`
+  :b.status==='flagged'?`<button class="ba-btn ink" onclick="bresub()">Mark as corrected &amp; resubmit</button>`:`<div class="ba-mu" style="flex:1;text-align:center">Only the Administrator can verify or flag bills.</div>`;
+ let ov='';
+ if(B.ov==='flag')ov=`<div class="ba-scrim" onclick="if(event.target===this){B.ov=null;R()}"><div class="ba-sheet"><h3>Why does this bill need a recheck?</h3>${BREASONS.map(r=>`<button class="ba-reason" onclick="bflag('${r}')">${r}</button>`).join('')}</div></div>`;
+ if(B.ov==='chat'){const msgs=b.comments.length?b.comments.map(c=>{const me=c.by==='Audit AI'?false:(c.by==='Auditor')===adm;return `<div class="ba-bub ${me?'me':'ot'}"><small>${esc(c.by)} · ${esc(c.at)}</small>${esc(c.text)}</div>`}).join(''):'<div class="ba-empty">No messages yet. Ask or clarify anything about this bill.</div>';
+  ov=`<div class="ba-scrim" onclick="if(event.target===this){B.ov=null;R()}"><div class="ba-sheet"><h3>Discussion · ${b.id}</h3><div class="ba-chat"><div class="ba-msgs" id="bmsgs">${msgs}</div><div class="ba-send"><input class="ba-inp" id="bci" placeholder="Write a message" autocomplete="off" onkeydown="if(event.key==='Enter')bsend()"><button class="ba-btn ink" onclick="bsend()">Send</button></div></div></div></div>`}
+ return `<div class="ba-wrap" role="dialog" aria-modal="true" aria-label="Bill review"><div class="ba-modal"><div class="ba-mh"><button class="back" onclick="bclose()">‹ Back</button><span class="id">${b.id}</span>${bpill(b.status)}</div>
+<div style="padding:12px 12px 0">${bdoc(b,'height:240px')}</div>
+<div style="flex:1;overflow-y:auto;padding:16px"><div class="ba-big">${inr(b.amount)}</div>${brcard(bscore(b))}
+${[['Vendor',b.vendor],['Invoice no.',b.inv],['Date',fdate(b.date)],['Category',b.cat],['Ward',WARDS[b.ward].n]].map(x=>`<div class="ba-dr"><span class="ba-mu">${x[0]}</span><b>${esc(x[1])}</b></div>`).join('')}
+<button class="ba-ah" onclick="B.aud=!B.aud;R()" aria-expanded="${B.aud}"><h2 class="ba-h2" style="margin:12px 0 4px">Audit history (${b.audit.length})</h2><span class="ba-mu">${B.aud?'▲':'▼'}</span></button>${audit}</div>
+<div class="ba-acts"><button class="ba-chatb" onclick="B.ov='chat';B.focus=true;R()" aria-label="Open discussion">💬${b.comments.length?`<span>${b.comments.length}</span>`:''}</button>${acts}</div>${ov}</div></div>`}
+const bopen=id=>{B.open=id;B.ov=null;B.aud=false;R()};
+function bclose(){B.open=null;B.ov=null;R()}
+const bcur=()=>S.bills.find(x=>x.id===B.open);
+function bapprove(){const b=bcur();if(!b||S.role!=='admin')return;b.status='verified';b.audit.push({who:ADM,what:'Verified bill',at:stamp()});toast('Bill '+b.id+' verified.');bclose()}
+function bflag(r){const b=bcur();if(!b||S.role!=='admin')return;b.status='flagged';
+ b.audit.push({who:ADM,what:'Flagged – '+r,at:stamp()});b.comments.push({by:'Auditor',text:'Flagged for recheck: '+r+'.',at:stamp()});B.ov=null;toast('Bill flagged: '+r);R()}
+function bresub(){const b=bcur();if(!b)return;b.status='pending';b.audit.push({who:sbn(b.ward),what:'Resubmitted after correction',at:stamp()});toast('Bill resubmitted for audit.');bclose()}
+function bsend(){const b=bcur(),i=document.getElementById('bci');if(!b||!i||!i.value.trim())return;
+ b.comments.push({by:S.role==='admin'?'Auditor':'Supervisor',text:i.value.trim(),at:stamp()});B.focus=true;R()}
+function bTheme(){const r=document.documentElement,el=document.querySelector('.ba'),dark=getComputedStyle(el).getPropertyValue('--paper').trim().toUpperCase()==='#0E1424';r.dataset.theme=dark?'light':'dark'}
+const _R=R;R=function(){_R();const m=document.getElementById('bmsgs');if(m)m.scrollTop=m.scrollHeight;if(B.focus){const i=document.getElementById('bci');if(i)i.focus();B.focus=false}};
+
+R();
+</script></body></html>
